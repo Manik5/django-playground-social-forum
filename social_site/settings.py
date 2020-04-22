@@ -40,7 +40,9 @@ INSTALLED_APPS = [
 
     'crispy_forms',
 
-    'accounts'
+    'accounts',
+    'core',
+    'forum'
 ]
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
@@ -63,7 +65,9 @@ TEMPLATES = [
         'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
-            os.path.join(BASE_DIR, 'accounts/templates')
+            os.path.join(BASE_DIR, 'accounts/templates'),
+            os.path.join(BASE_DIR, 'core/templates'),
+            os.path.join(BASE_DIR, 'forum/templates')
         ],
         'APP_DIRS':
         True,

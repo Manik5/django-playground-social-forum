@@ -17,7 +17,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
 
-      <a class="navbar-brand" href="#">DEBATE</a>
+      <a class="navbar-brand" href="/">DEBATE</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -39,18 +39,18 @@
                 {{ request.user.username }}
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Profile</a>
-                <a class="dropdown-item" href="#">Change Password</a>
+                <a class="dropdown-item" href="{% url 'user_profile' username=request.user.username %}">Profile</a>
+                <a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
               </div>
             </li>
             {% else %}
               <li class="nav-item">
-                <a class="nav-link" href="#">Sign Up</a>
+                <a class="nav-link" href="{% url 'registration_view' %}">Sign Up</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Log In</a>
+                <a class="nav-link" href="{% url 'login' %}">Log In</a>
               </li>
               {% endif %}
           </ul>
