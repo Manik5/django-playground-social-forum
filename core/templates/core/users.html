@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block head_title %} Debate | User List{% endblock head_title %}
+
+{% block content %}
+
+  <h2>User List</h2>
+  <hr>
+  {% for user in object_list%}
+    <p><a href="{% url 'user_profile' username=user.username %}"><strong>@{{ user.username }}</strong></a></p>
+  {% endfor %}
+
+{% endblock content %}
