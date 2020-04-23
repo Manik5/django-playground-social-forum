@@ -133,7 +133,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATICFILE_DIRS = [os.path.join(BASE_DIR, 'static-storage')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static-storage')]
 
 STATIC_URL = '/static/'
 
