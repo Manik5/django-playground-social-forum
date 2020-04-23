@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView
 from django.http import HttpResponseRedirect
 # Create your views here.
@@ -17,12 +18,13 @@ def visualizeSection(request, pk):
     context = {"section": section}
     return render(request, "forum/single_section.html", context)
 
+@login_required
 def createDiscussion(request, pk):
     section = get_object_or_404(Section, pk=pk)
     if request.method == "POST":
       form = DiscussionModelForm(request.POST)
       if form.is_valid():
-        discussion = forms.save(commit=False)
+        discussion = form.save(commit=False)
         discussion.belong_section = section
         discussion.author_discussion = request.user
         discussion.save()
@@ -34,6 +36,6 @@ def createDiscussion(request, pk):
         return HttpResponseRedirect("/admin/")
     else:
       form = DiscussionModelForm()
-    context = {"form": forms, "section": section}
+    context = {"form": form, "section": section}
     return render(request, "forum/create_discussion.html", context)
 
