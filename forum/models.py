@@ -15,7 +15,7 @@ class Section(models.Model):
 
 class Discussion(models.Model):
   title = models.CharField(max_length=120)
-  data_creation = models.DateTimeField(auto_now_add=True)
+  creation_date = models.DateTimeField(auto_now_add=True)
   author_discussion = models.ForeignKey(User, on_delete=models.CASCADE, related_name="discussions")
   belong_section = models.ForeignKey(Section, on_delete=models.CASCADE)
 
@@ -29,4 +29,4 @@ class Post(models.Model):
   discussion = models.ForeignKey(Discussion, on_delete=models.CASCADE)
 
   def __str__(self):
-    return self.author_post
+    return self.author_post.username
