@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block head_title %}{{ block.super }} - {{ section.name_section }}{% endblock head_title %}
+
+{% block content %}
+
+<div class="card my-3">
+  <div class="card-header">
+    <h3>{{ section.name_section }}</h3>
+    <h6 class="card-text">{{ section.description }}</h6>
+  </div>
+</div>
+
+{% endblock content %}

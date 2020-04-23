@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 # Create your models here.
 
 class Section(models.Model):
@@ -12,6 +13,9 @@ class Section(models.Model):
 
   def __str__(self):
     return self.name_section
+
+  def get_absolute_url(self):
+    return reverse("section_view", kwargs={"pk": self.pk})
 
 class Discussion(models.Model):
   title = models.CharField(max_length=120)

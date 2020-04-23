@@ -2,6 +2,10 @@
 
 {% block content %}
 
-<h1>Homepage</h1>
-
+  {% for section in list_section %}
+    <h5><a href="{{ section.get_absolute_url }}"><strong>{{ section.name_section }}</strong></a></h5>
+    <p>{{ section.description }}</p>
+    <img src="{{ section.logo_section.url }}" alt="section logo">
+    <hr>
+  {% endfor %}
 {% endblock content %}
