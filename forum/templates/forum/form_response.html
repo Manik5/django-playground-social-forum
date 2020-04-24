@@ -1,0 +1,7 @@
+{% load crispy_forms_tags %}
+
+<form class="mb3" action="{% url 'response_discussion' pk=discussion.pk %}" method="POST">
+  {% csrf_token %}
+  {{ form_response|crispy }}
+  <input type="submit" class="btn btn-info" value="Answer">
+</form>

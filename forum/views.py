@@ -43,13 +43,23 @@ def createDiscussion(request, pk):
 def visualizeDiscussion(request, pk):
   discussion = get_object_or_404(Discussion, pk=pk)
   posts_discussion = Post.objects.filter(discussion=discussion)
-  context = {"discussion": discussion, "posts_discussion": posts_discussion}
+  form_response = PostModelForm()
+  context = {"discussion": discussion,
+             "posts_discussion": posts_discussion,
+             "form_response": form_response
+             }
   return render(request, "forum/single_discussion.html", context)
 
 
-def addAnswer(request, pk):
+def addResponse(request, pk):
   discussion = get_object_or_404(Discussion, pk=pk)
   if request.method == "POST":
     form = PostModelForm(request.POST)
+    if form.is_valid():
+      form.save(commit=False)
+      form.instance.discussion = discussion
+      form.instance.author_post = request.user
+      form.save()
+      url_discussion = reverse("visualize_discussion", kwargs={"pk": pk})
   else:
-    return HttpResponseBadRequest
+    return HttpResponseBadRequest()
