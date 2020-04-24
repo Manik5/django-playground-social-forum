@@ -27,14 +27,14 @@
                 <tbody>
                   {% for discussion in section.get_last_discussions.all %}
                     <tr class="row">
-                      <td class="col-lg-7">
+                      <td class="col-lg-7 col-6">
                         <a href="{% url 'visualize_discussion' pk=discussion.pk %}">{{ discussion.title }}</a>
                       </td>
-                      <td class="col-lg-3">
+                      <td class="col-lg-3 col-3">
                         <a href="{% url 'user_profile' username=discussion.author_discussion.username %}">{{ discussion.author_discussion }}</a>
                       </td>
-                      <td class="col-lg-2">
-                        posts: {{ discussion.posts.count }}</a>
+                      <td class="col-lg-2 col-3">
+                        posts: {{ discussion.post_set.count }}</a>
                       </td>
                     </tr>
                   {% endfor %}
