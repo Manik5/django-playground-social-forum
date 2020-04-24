@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
+from django.urls import reverse
 # Create your views here.
 from .forms import DiscussionModelForm, PostModelForm
 from .mixins import StaffMixing
@@ -50,7 +51,7 @@ def visualizeDiscussion(request, pk):
              }
   return render(request, "forum/single_discussion.html", context)
 
-
+@login_required
 def addResponse(request, pk):
   discussion = get_object_or_404(Discussion, pk=pk)
   if request.method == "POST":
@@ -61,5 +62,6 @@ def addResponse(request, pk):
       form.instance.author_post = request.user
       form.save()
       url_discussion = reverse("visualize_discussion", kwargs={"pk": pk})
+      return HttpResponseRedirect(url_discussion)
   else:
     return HttpResponseBadRequest()
