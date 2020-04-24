@@ -30,11 +30,26 @@
             </div>
           </div>
         </div>
-
-          <!-- <h6 class="card-text">{{ section.description }}</h6> -->
       </div>
-
   {% endfor %}
+
+      <div class="pagination">
+        <span class="step-links">
+          {% if posts_discussion.has_previous %}
+          <a href="?page=1">&laquo; first</a>
+          <a href="?page={{ posts_discussion.previous_page_number }}">previous</a>
+          {% endif %}
+
+          <span class="current">
+            Page {{ posts_discussion.number }} of {{ posts_discussion.paginator.num_pages }}.
+          </span>
+
+          {% if posts_discussion.has_next %}
+          <a href="?page={{ posts_discussion.next_page_number }}">next</a>
+          <a href="?page={{ posts_discussion.paginator.num_pages }}">last &raquo;</a>
+          {% endif %}
+        </span>
+      </div>
 
   {% if request.user.is_authenticated %}
     {% include 'forum/form_response.html' %}

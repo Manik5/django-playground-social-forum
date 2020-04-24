@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.urls import reverse
-# Create your views here.
 from .forms import DiscussionModelForm, PostModelForm
 from .mixins import StaffMixing
 from .models import Discussion, Post, Section
@@ -44,9 +44,14 @@ def createDiscussion(request, pk):
 def visualizeDiscussion(request, pk):
   discussion = get_object_or_404(Discussion, pk=pk)
   posts_discussion = Post.objects.filter(discussion=discussion)
+
+  paginator = Paginator(posts_discussion, 5)
+  page = request.GET.get("page")
+  posts = paginator.get_page(page)
+
   form_response = PostModelForm()
   context = {"discussion": discussion,
-             "posts_discussion": posts_discussion,
+             "posts_discussion": posts,
              "form_response": form_response
              }
   return render(request, "forum/single_discussion.html", context)
