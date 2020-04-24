@@ -26,6 +26,9 @@ class Discussion(models.Model):
   def __str__(self):
     return self.title
 
+  def get_absolute_url(self):
+    return reverse("visualize_discussion", kwargs={"pk": self.pk})
+
 class Post(models.Model):
   author_post = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
   content = models.TextField()
