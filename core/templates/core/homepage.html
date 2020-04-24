@@ -2,10 +2,48 @@
 
 {% block content %}
 
+  {% if request.user.is_staff %}
+    <div class="card-body pl-0">
+      <a class="btn btn-sm btn-danger" href="{% url 'create_section' %}">Create Section</a>
+    </div>
+  {% endif %}
   {% for section in list_section %}
-    <h5><a href="{{ section.get_absolute_url }}"><strong>{{ section.name_section }}</strong></a></h5>
-    <p>{{ section.description }}</p>
-    <img src="{{ section.logo_section.url }}" alt="section logo">
-    <hr>
+    <div class="card my-3">
+      <div class="card-header">
+        <h5><a href="{{ section.get_absolute_url }}"><strong>{{ section.name_section }}</strong></a></h5>
+        <p class="mb-0">{{ section.description }}</p>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-3">
+              <img src="{{ section.logo_section.url }}" style="max-width:100%">
+              <p>Total Discussions: {{ section.discussion_set.count }}
+              <br>
+              Total Messages: {{ section.get_number_of_posts_in_section }}</p>
+            </div>
+            <div class="col-lg-9">
+              <p>Last Discussions:</p>
+              <table class="table table-hover">
+                <tbody>
+                  {% for discussion in section.get_last_discussions.all %}
+                    <tr class="row">
+                      <td class="col-lg-7">
+                        <a href="{% url 'visualize_discussion' pk=discussion.pk %}">{{ discussion.title }}</a>
+                      </td>
+                      <td class="col-lg-3">
+                        <a href="{% url 'user_profile' username=discussion.author_discussion.username %}">{{ discussion.author_discussion }}</a>
+                      </td>
+                      <td class="col-lg-2">
+                        posts: {{ discussion.posts.count }}</a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+        </div>
+      </div>
+    </div>
+      <hr>
   {% endfor %}
 {% endblock content %}

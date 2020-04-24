@@ -11,12 +11,12 @@
   </div>
 
   <div class="card-body">
-    <a class="btn btn-sm btn-info" href="{% url 'create_discussion' pk=section.pk %}">Create Discussion</a>
     {% for discussion in discussions %}
-      <p><a href="{{ discussion.get_absolute_url }}">{{ discussion.title }}</a></p>
-      <p>{{ discussion.author_discussion }}</p>
+    <p><a href="{{ discussion.get_absolute_url }}">{{ discussion.title }}</a></p>
+    <p>{{ discussion.author_discussion }}</p>
     {% endfor %}
   </div>
 </div>
+<a class="btn btn-sm btn-info" href="{% url 'create_discussion' pk=section.pk %}">Create Discussion</a>
 
 {% endblock content %}

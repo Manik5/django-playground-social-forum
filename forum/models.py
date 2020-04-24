@@ -17,6 +17,15 @@ class Section(models.Model):
   def get_absolute_url(self):
     return reverse("section_view", kwargs={"pk": self.pk})
 
+  def get_absolute_url(self):
+    return reverse("visualize_discussion", kwargs={"pk": self.pk})
+
+  def get_last_discussions(self):
+    return Discussion.objects.filter(belong_section=self).order_by("-creation_date")[:2]
+
+  def get_number_of_posts_in_section(self):
+    return Post.objects.filter(discussion__belong_section=self).count()
+
 class Discussion(models.Model):
   title = models.CharField(max_length=120)
   creation_date = models.DateTimeField(auto_now_add=True)
@@ -26,8 +35,6 @@ class Discussion(models.Model):
   def __str__(self):
     return self.title
 
-  def get_absolute_url(self):
-    return reverse("visualize_discussion", kwargs={"pk": self.pk})
 
 class Post(models.Model):
   author_post = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
