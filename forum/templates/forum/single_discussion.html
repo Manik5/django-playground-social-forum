@@ -7,7 +7,7 @@
 
   {% for post in posts_discussion %}
       <div class="card my-3">
-      {% if forloop.first %}
+      {% if forloop.first and not "page" in request.get_full_path %}
           <div class="card-header pb-0">
             <h3>{{ discussion.title }}</h3>
             <p class="text-muted">{{ discussion.creation_date|date:"D d M Y" }}
@@ -15,7 +15,11 @@
           </div>
       {% else %}
           <div class="card-header py-0">
-            <p class="text-muted mb-0">{{ post.creation_date|date:"d M Y" }}</p>
+            <p class="text-muted mb-0">{{ post.creation_date|date:"d M Y" }}
+              {% if request.user == post.author_post %}
+                <a href="{% url 'cancel_post' id=discussion.pk pk=post.pk %}">Delete</a>
+              {% endif %}
+            </p>
           </div>
       {% endif %}
         <div class="card-body">
@@ -33,7 +37,7 @@
       </div>
   {% endfor %}
 
-      <div class="pagination">
+      <div class="text-right">
         <span class="step-links">
           {% if posts_discussion.has_previous %}
           <a href="?page=1">&laquo; first</a>

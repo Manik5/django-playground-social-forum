@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, DeleteView
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.urls import reverse
 from .forms import DiscussionModelForm, PostModelForm
@@ -67,6 +67,19 @@ def addResponse(request, pk):
       form.instance.author_post = request.user
       form.save()
       url_discussion = reverse("visualize_discussion", kwargs={"pk": pk})
-      return HttpResponseRedirect(url_discussion)
+      pages_in_discussion = discussion.get_n_pages()
+      if pages_in_discussion > 1:
+          success_url = url_discussion + "?page=" + str(pages_in_discussion)
+          return HttpResponseRedirect(success_url)
+      else:
+          return HttpResponseRedirect(url_discussion)
   else:
     return HttpResponseBadRequest()
+
+class CancelPost(DeleteView):
+  model = Post
+  success_url = "/"
+
+  def get_queryset(self):
+    queryset = super().get_queryset()
+    return queryset.filter(author_post_id=self.request.user.id)
