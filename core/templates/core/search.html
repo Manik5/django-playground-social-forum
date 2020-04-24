@@ -9,9 +9,13 @@
   <div class="row mt-3">
     <div class="col-4">
       <h5><strong>Posts</strong></h5>
+      <hr>
         {% if posts %}
           {% for post in posts %}
-            <p>{{ post.content }}</p>
+            <p>{{ post.content|truncatewords:"10" }}</p>
+            <p>By: <a href="{% url 'user_profile' username=post.author_post.username %}">@{{ post.author_post.username }}</a></p>
+            <p class="mb-0">In: <a href="{{ post.discussion.get_absolute_url }}">{{ post.discussion.title }}</a></p>
+            <hr>
           {% endfor %}
         {% else %}
             <p>---</p>
@@ -19,9 +23,10 @@
     </div>
     <div class="col-4">
       <h5><strong>Discussions</strong></h5>
+      <hr>
         {% if discussions %}
           {% for discussion in discussions %}
-            <p>{{ discussion.title }}</p>
+            <p><a href="{{ discussion.get_absolute_url }}">{{ discussion.title }}</a></p>
           {% endfor %}
         {% else %}
               <p>---</p>
@@ -29,9 +34,10 @@
     </div>
     <div class="col-4">
       <h5><strong>Users</strong></h5>
+      <hr>
         {% if users %}
           {% for user in users %}
-            <p>{{ user }}</p>
+            <p><a href="{% url 'user_profile' username=user.username %}">@{{ user }}</a></p>
           {% endfor %}
         {% else %}
             <p>---</p>
