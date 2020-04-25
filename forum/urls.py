@@ -13,7 +13,7 @@ urlpatterns = [
     path('discussion/<int:pk>/response',
          views.addResponse,
          name="response_discussion"),
-    path('discussion/<int:pk>/cancel-post/<int:pk>/',
+    path('discussion/<int:id>/cancel-post/<int:pk>/',
          views.CancelPost.as_view(),
          name="cancel_post"),
 ]

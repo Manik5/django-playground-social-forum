@@ -75,11 +75,10 @@ def addResponse(request, pk):
           return HttpResponseRedirect(url_discussion)
   else:
     return HttpResponseBadRequest()
-
 class CancelPost(DeleteView):
-  model = Post
-  success_url = "/"
+    model = Post
+    success_url = "/"
 
-  def get_queryset(self):
-    queryset = super().get_queryset()
-    return queryset.filter(author_post_id=self.request.user.id)
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(author_post_id=self.request.user.id)

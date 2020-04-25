@@ -2,6 +2,12 @@ body {
   font-family: 'Playfair Display', serif;
 }
 
+
+
 a, a:hover {
   color: #17a2b8;
+}
+
+#discussion {
+  color: blue;
 }

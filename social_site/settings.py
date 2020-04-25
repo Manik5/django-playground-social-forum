@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,10 +27,23 @@ SECRET_KEY = '6a%@175)w&*egm=1wax89n&j+eg1ih^hb4k7mz%of_0!q6g01y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
+
 ALLOWED_HOSTS = []
 
 
 # Application definition
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -55,6 +70,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
 ]
 
 ROOT_URLCONF = 'social_site.urls'
@@ -88,12 +104,6 @@ WSGI_APPLICATION = 'social_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 
 # Password validation
@@ -130,10 +140,21 @@ USE_TZ = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+
+
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static-storage')]
+
+
+
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static-storage'),
+]
+
 
 STATIC_URL = '/static/'
 
@@ -141,3 +162,4 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media-serve')
 MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = "/"
+

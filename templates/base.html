@@ -1,5 +1,4 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'js/script.js' %}">
 
 <!doctype html>
 <html lang="en">
@@ -12,18 +11,20 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+  <script src="https://kit.fontawesome.com/f5e55803f2.js" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static '/css/debate.css' %}">
+  <link rel="stylesheet" href="{% static 'js/script.js' %}">
 
-  <title>{% block head_title %}Debate{% endblock head_title %}</title>
+
+  <title>{% block head_title %}TripBate{% endblock head_title %}</title>
 </head>
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
 
-      <a class="navbar-brand" href="/">DEBATE</a>
+      <a class="navbar-brand" href="/">TripBate</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
